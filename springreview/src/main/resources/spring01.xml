@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="beans.Student" id="student">
+        <property name="id" value="autowired"/>
+        <property name="name" value="xu"/>
+        <property name="age" value="17"/>
+        <property name="gender" value="male"/>
+    </bean>
+
+    <bean class="beans.Student" id="student1" scope="prototype">
+        <property name="id" value="20171004049"/>
+        <property name="name" value="xu"/>
+        <property name="age" value="17"/>
+        <property name="gender" value="male"/>
+    </bean>
+
+    <bean class="beans.Student" id="student2">
+        <constructor-arg name="id" value="20171004049"/>
+        <constructor-arg name="name" value="xu"/>
+        <constructor-arg name="age" value="17"/>
+        <constructor-arg name="gender" value="male"/>
+    </bean>
+
+    <bean class="beans.Teacher" id="teacher1">
+        <property name="student" ref="student1"/>
+    </bean>
+
+    <bean class="beans.Teacher" id="teacher2">
+        <constructor-arg name="student" ref="student2"/>
+    </bean>
+
+    <bean class="beans.Teacher" id="teacher" autowire="byName"/>
+
+    <context:property-placeholder location="db.properties"/>
+</beans>
